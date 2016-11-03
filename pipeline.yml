@@ -1,0 +1,22 @@
+---
+jobs:
+- name: build
+  plan:
+  - get: lotc
+    trigger: true
+  - put: lotc-image
+    params: {build: lotc}
+
+resources:
+- name: lotc
+  type: git
+  source:
+    uri: {{git-uri}}
+    branch: {{git-branch}}
+
+- name: lotc-image
+  type: docker-image
+  source:
+    repository: {{docker-repository}}
+    username: {{docker-username}}
+    password: {{docker-password}}
