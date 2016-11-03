@@ -1,6 +1,7 @@
 ---
 jobs:
 - name: build
+  public: true
   plan:
   - get: lotc
     trigger: true
