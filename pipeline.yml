@@ -2,11 +2,68 @@
 jobs:
 - name: build
   public: true
+  serial_groups: [version]
   plan:
-  - get: lotc
+  - aggregate:
+    - get: lotc
+      trigger: true
+    - get: version
+      params: {pre: rc}
+  - put: version
+    params: {file: version/version}
+  - put: lotc-image-rc
+    params:
+      build: lotc
+      tag: version/version
+      tag_as_latest: false
+
+- name: shipit
+  public: true
+  serial_groups: [version]
+  plan:
+  - aggregate:
+    - get: lotc-image-rc
+      passed: [build]
+      params: {save: true}
+    - get: version
+      passed: [build]
+      params: {bump: final}
+  - put: version
+    params: {file: version/version}
+  - put: lotc-image-final
+    params:
+      load: lotc-image-rc
+      tag: version/version
+      tag_as_latest: true
+
+- name: major
+  public: true
+  serial_groups: [version]
+  plan:
+  - get: version
+    params: {bump: major, pre: rc}
+  - put: version
+    params: {file: version/version}
+
+- name: minor
+  public: true
+  serial_groups: [version]
+  plan:
+  - get: version
+    params: {bump: minor, pre: rc}
+  - put: version
+    params: {file: version/version}
+
+- name: patch
+  public: true
+  serial_groups: [version]
+  plan:
+  - get: version
+    passed: [shipit]
+    params: {bump: patch, pre: rc}
     trigger: true
-  - put: lotc-image
-    params: {build: lotc}
+  - put: version
+    params: {file: version/version}
 
 resources:
 - name: lotc
@@ -14,10 +71,30 @@ resources:
   source:
     uri: {{git-uri}}
     branch: {{git-branch}}
+    private_key: {{git-private-key}}
+    paths:
+    - Dockerfile
 
-- name: lotc-image
+- name: version
+  type: semver
+  source:
+    driver: git
+    initial_version: 1.0.0-rc.0
+    uri: {{git-uri-semver}}
+    branch: version
+    file: version
+    private_key: {{git-private-key}}
+
+- name: lotc-image-rc
   type: docker-image
   source:
-    repository: {{docker-repository}}
+    repository: {{docker-repository-rc}}
+    username: {{docker-username}}
+    password: {{docker-password}}
+
+- name: lotc-image-final
+  type: docker-image
+  source:
+    repository: {{docker-repository-final}}
     username: {{docker-username}}
     password: {{docker-password}}
