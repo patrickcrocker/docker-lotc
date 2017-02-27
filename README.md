@@ -1,5 +1,7 @@
 # Lord of the CLI Docker Image
 
+[![ci.anvil.pcfdemo.com](https://ci.anvil.pcfdemo.com/api/v1/teams/main/pipelines/docker-lotc/jobs/build/badge)](https://ci.anvil.pcfdemo.com/teams/main/pipelines/docker-lotc) [docker](https://hub.docker.com/r/patrickcrocker/lotc/)
+
 One Image to rule them all:
 
 Utils:
