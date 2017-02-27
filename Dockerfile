@@ -5,6 +5,7 @@ RUN apt-get update
 RUN apt-get -y install curl=7.47.0-1ubuntu2.2
 RUN apt-get -y install wget=1.17.1-1ubuntu1.1
 RUN apt-get -y install jq=1.5+dfsg-1
+RUN apt-get -y install vim=2:7.4.1689-3ubuntu1.2
 
 # Install aws cli
 RUN apt-get -y install awscli=1.11.13-1ubuntu1~16.04.0
