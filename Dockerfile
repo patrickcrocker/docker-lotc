@@ -30,7 +30,7 @@ RUN gem install bosh_cli -v 1.3262.26.0 --no-ri --no-rdoc
 ADD https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.25.0 /tmp/cf-cli.tgz
 RUN mkdir -p /usr/local/bin && \
   tar -xzf /tmp/cf-cli.tgz -C /usr/local/bin && \
-  cf --version \
+  cf --version && \
   cf install-plugin -r CF-Community "autopilot" \
 RUN rm -f /tmp/cf-cli.tgz
 
