@@ -36,7 +36,7 @@ RUN mkdir -p /usr/local/bin && \
 # Install cf cli Autopilot plugin
 ADD https://github.com/contraband/autopilot/releases/download/0.0.2/autopilot-linux /tmp/autopilot-linux
 RUN chmod +x /tmp/autopilot-linux && \
-  cf install-plugin -r CF-Community "autopilot" -f && \
+  cf install-plugin /tmp/autopilot-linux && \
   rm -f /tmp/autopilot-linux
 
 # Install Om
