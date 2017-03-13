@@ -31,14 +31,19 @@ ADD https://cli.run.pivotal.io/stable?release=linux64-binary&version=6.25.0 /tmp
 RUN mkdir -p /usr/local/bin && \
   tar -xzf /tmp/cf-cli.tgz -C /usr/local/bin && \
   cf --version && \
-  cf install-plugin -r CF-Community "autopilot" \
-RUN rm -f /tmp/cf-cli.tgz
+  rm -f /tmp/cf-cli.tgz
+
+# Install cf cli Autopilot plugin
+ADD https://github.com/contraband/autopilot/releases/download/0.0.2/autopilot-linux /tmp/autopilot-linux
+RUN chmod +x /tmp/autopilot-linux && \
+  cf install-plugin -r CF-Community "autopilot" -f && \
+  rm -f /tmp/autopilot-linux
 
 # Install Om
 Add https://github.com/pivotal-cf/om/releases/download/0.18.0/om-linux /tmp/om-linux
 RUN install /tmp/om-linux /usr/local/bin/om && \
-  om --version
-RUN rm -f /tmp/om-linux
+  om --version && \
+  rm -f /tmp/om-linux
 
 # Clean apt-get cache
 RUN apt-get clean
