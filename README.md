@@ -10,6 +10,7 @@ Utils:
 - wget
 - tar
 - jq
+- git
 - openssh
 - [util-linux](https://pkgs.alpinelinux.org/package/v3.4/main/x86_64/util-linux)
 
