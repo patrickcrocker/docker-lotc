@@ -11,6 +11,7 @@ Utils:
 - tar
 - jq
 - git
+- xmllint (libxml2-utils)
 - openssh
 - [util-linux](https://pkgs.alpinelinux.org/package/v3.4/main/x86_64/util-linux)
 

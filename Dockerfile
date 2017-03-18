@@ -7,6 +7,7 @@ RUN apt-get update && apt-get -y install \
     jq=1.5+dfsg-1 \
     vim=2:7.4.1689-3ubuntu1.2 \
     git=1:2.7.4-0ubuntu1 \
+    libxml2-utils=2.9.3+dfsg1-1ubuntu0.2 \
   # AWS cli
     awscli=1.11.13-1ubuntu1~16.04.0 \
   # Ruby (for cf-uaac)
