@@ -11,9 +11,10 @@ Utils:
 - bash
 - curl
 - wget
-- jq
+- [jq](https://stedolan.github.io/jq/)
 - git
 - xmllint (libxml2-utils)
+- [yaml](https://github.com/mikefarah/yaml)
 
 Languages:
 - python (py-pip)
@@ -22,6 +23,6 @@ Languages:
 CLIs:
 - aws
 - bosh
-- cf
-  - autopilot plugin
+- [cf](https://github.com/cloudfoundry/cli)
+  - [autopilot plugin](https://github.com/contraband/autopilot)
 - uaac
